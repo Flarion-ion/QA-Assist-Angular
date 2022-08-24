@@ -1,0 +1,450 @@
+h1{
+  margin-top: 2rem;
+  position: relative;
+  font-family: emoji;
+  display: flex;
+  justify-content: center;
+  background-color: var(--header);
+  padding: 10px;
+  color: rgb(255, 255, 255);
+  border-radius: 24px;
+  border: transparent;
+  //box-shadow: rgb(213 210 208) 5px 5px 15px, rgb(255 255 255) -5px -5px 15px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #c000ff 0%, #2700ff 100%);
+  box-shadow: rgba(8, 0, 255, 0.5) 0px 5px 30px 1px, whitesmoke 0px 20px 10px 1px;
+  cursor: pointer;
+}
+.smiley
+{
+  background: linear-gradient(135deg, rgb(255, 233, 25) 0%, rgb(251, 192, 0) 100%);
+  border-radius: 100%;
+  padding: 25px;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  box-shadow: rgba(211, 165, 110, 0.498039) 0px 30px 30px 1px, rgb(245, 245, 245) 0px 20px 10px 1px;
+}
+
+
+.mouth
+{
+  width: 60%;
+  height: 30%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  margin-left: -30%;
+  background: #B57700;
+  transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+
+.eyes
+{
+  width: 100%;
+  margin-top: 15%;
+  box-sizing: border-box;
+  padding: 0 5px;
+  transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.eyes .eye
+{
+  width: 20px;
+  height: 20px;
+  background: #B57700;
+  float: left;
+  border-radius: 100%;
+  position: relative;
+}
+
+.eyes .eye:nth-of-type(2)
+{
+  float: right;
+}
+
+.eyes .eye::after
+{
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0%;
+  height: 0%;
+  background: #fed800;
+  transform: rotate(0deg);
+  top: -15px;
+  left: 5px;
+  transition:         all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.eyes .eye:first-of-type::after
+{
+  transform: rotate(0deg);
+  left: auto;
+  right: 5px;
+}
+/* Happy-Normal animation */
+.smiley.happy-normal .mouth,
+#happy-normal[type=radio]:checked ~ .smiley .mouth
+{
+  width: 60%;
+  height: 29%;
+  border-radius: 100px 100px 0 0;
+  border-top: 10px solid #B57700;
+  border-left: 5px solid #B57700;
+  border-right: 5px solid #B57700;
+  border-width: 14px;
+  transform: rotateZ(180deg);
+  background: rgba(181, 119, 0, 0);
+  bottom: 9%;
+  left: 50%;
+  margin-left: -30%;
+}
+
+.smiley.happy-normal .eyes,
+#happy-normal[type=radio]:checked ~ .smiley .eyes
+{
+  margin-top:25%
+}
+/* Normal animation */
+.smiley.normal .mouth,
+#normal[type=radio]:checked ~ .smiley .mouth
+{
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  height: 10%;
+  width: 40%;
+  bottom: 25%;
+  margin-left: -20%;
+}
+
+.smiley.normal .eyes,
+#normal[type=radio]:checked ~ .smiley .eyes
+{
+  margin-top: 30%
+}
+
+/* Normal-angry animation */
+.smiley.normal-angry .mouth,
+#normal-angry[type=radio]:checked ~ .smiley .mouth
+{
+  width: 49%;
+  height: 25%;
+  border-radius: 100px 100px 0 0;
+  border-top: 10px solid #B57700;
+  border-left: 5px solid #B57700;
+  border-right: 5px solid #B57700;
+  border-width: 14px;
+  background: rgba(181, 119, 0, 0);
+  bottom: 20%;
+  left: 50%;
+  margin-left: -25%;
+
+}
+
+.smiley.normal-angry .eyes,
+#normal-angry[type=radio]:checked ~ .smiley .eyes
+{
+  margin-top:15%
+}
+
+
+/* angry animation */
+.smiley.angry .mouth,
+#angry[type=radio]:checked ~ .smiley .mouth
+{
+  width: 40%;
+  height: 20%;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  bottom: 18%;
+  left: 50%;
+  margin-left: -20%;
+  border-bottom: 0;
+}
+
+.smiley.angry .eyes,
+#angry[type=radio]:checked ~ .smiley .eyes
+{
+  margin-top: 35%
+}
+
+.smiley.angry .eye::after,
+#angry[type=radio]:checked ~ .smiley .eye::after
+{
+  width: 120%;
+  height: 50%;
+  transform: rotate(-35deg);
+  top: -3px;
+  left: -5px;
+  border-radius: 0;
+}
+
+.smiley.angry .eye:first-of-type::after,
+#angry[type=radio]:checked ~ .smiley .eye:first-of-type::after
+{
+  transform: rotate(35deg);
+  left: auto;
+  right: -5px;
+}
+
+/* */
+
+.smiley.happy .mouth,
+#happy[type=radio]:checked ~ .smiley .mouth
+{
+  animation: move-mouth-down 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+.smiley.normal-angry .mouth,
+#normal-angry[type=radio]:checked ~ .smiley .mouth
+{
+  animation: move-mouth-down 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes move-mouth-down
+{
+  0%
+  {
+    bottom: 18%;
+  }
+
+  4.55%
+  {
+    bottom: 16%;
+  }
+
+  8.45%
+  {
+    bottom: 16%;
+  }
+
+  13%
+  {
+    bottom: 18%;
+  }
+  100%
+  {
+    bottom: 18%;
+  }
+}
+
+
+.smiley.happy .eyes,
+#happy[type=radio]:checked ~ .smiley .eyes
+{
+  animation: move-eyes-down 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+.smiley.normal-angry .eyes,
+#normal-angry[type=radio]:checked ~ .smiley .eyes
+{
+  animation: move-eyes-down 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move-eyes-down
+{
+  0%
+  {
+    margin-top: 15%;
+  }
+
+  4.55%
+  {
+    margin-top: 19%;
+  }
+
+  8.45%
+  {
+    margin-top: 19%;
+  }
+
+  13%
+  {
+    margin-top: 15%;
+  }
+
+  100%
+  {
+    margin-top: 15%;
+  }
+
+}
+
+
+
+.smiley.happy .eye:nth-of-type(2),
+#happy[type=radio]:checked ~ .smiley .eye:nth-of-type(2)
+{
+  height: 20px;
+  margin-top: 0;
+  animation: wink 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes wink
+{
+  0%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+
+  3.9%
+  {
+    height: 3px;
+    margin-top: 8px;
+  }
+
+  9.1%
+  {
+    height: 3px;
+    margin-top: 8px;
+  }
+
+  13%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+
+  100%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+}
+
+.smiley.happy-normal .eye,
+#happy-normal[type=radio]:checked ~ .smiley .eye
+{
+  height: 20px;
+  margin-top: 0;
+  animation: wink 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+
+.smiley.normal .eye,
+#normal[type=radio]:checked ~ .smiley .eye
+{
+  height: 20px;
+  margin-top: 0;
+  animation: blink 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes blink
+{
+  0%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+
+  3.25%
+  {
+    height: 2px;
+    margin-top: 8px;
+  }
+
+  6.5%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+
+  9.75%
+  {
+    height: 2px;
+    margin-top: 8px;
+  }
+
+  13%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+  100%
+  {
+    height: 20px;
+    margin-top: 0;
+  }
+}
+
+
+
+
+.smiley.angry .eyes,
+.smiley.angry .mouth,
+#angry[type=radio]:checked ~ .smiley .eyes,
+#angry[type=radio]:checked ~ .smiley .mouth
+{
+  animation: move-angry-head 6s;
+  animation-delay: 5s;
+  animation-iteration-count: infinite;
+}
+
+
+
+
+@keyframes move-angry-head
+{
+  0%
+  {
+    transform: translateX(0%);
+  }
+
+  2.6%
+  {
+    transform: translateX(-20%);
+  }
+
+  5.2%
+  {
+    transform: translateX(15%);
+  }
+
+  7.8%
+  {
+    transform: translateX(-10%);
+  }
+
+  10.4%
+  {
+    transform: translateX(5%);
+  }
+
+  13%
+  {
+    transform: translateX(0%);
+  }
+  100%
+  {
+    transform: translateX(0%);
+  }
+}

@@ -1,0 +1,45 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  SHORT_MSV_NAME: qa-assist
+  CI_REGISTRY_IMAGE: dockerhub.cloud.gas.by/${SHORT_MSV_NAME}
+  VIRTUAL_HOST: evo.oblgas.by
+
+build-no-cache:
+  stage: build
+  script:
+    - export DATEVERSION=$(date +%y%m%d)
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA . --no-cache
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+  tags:
+    - build
+  when: manual
+
+build:
+  only:
+    - branches
+  stage: build
+  script:
+    - export DATEVERSION=$(date +%y%m%d)
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+  tags:
+    - build
+
+deploy:
+  stage: deploy
+  variables:
+    DREALM: qa-assist
+    SERVICE_REPLICAS: 1
+  script:
+    - docker stack deploy --prune -c docker-compose.yml ${DREALM}_${SHORT_MSV_NAME}
+  tags:
+    - msv-prod

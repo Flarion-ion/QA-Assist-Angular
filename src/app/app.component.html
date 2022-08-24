@@ -1,0 +1,11 @@
+<div class="all-smiles">
+  <!--<app-base-smile class="smile-block" [typeSmile]="'happy'"></app-base-smile>
+  <app-base-smile class="smile-block" [typeSmile]="'happy-normal'"></app-base-smile>
+  <app-base-smile class="smile-block" [typeSmile]="'normal'"></app-base-smile>
+  <app-base-smile class="smile-block" [typeSmile]="'normal-angry'"></app-base-smile>
+  <app-base-smile class="smile-block" [typeSmile]="'angry'"></app-base-smile>
+  -->
+  <div *ngFor="let data of setting" >
+    <app-base-smile class="smile-block" [typeSmile]="data['type']" [text]="data['text']" [value]="data['value']" (onClick)="click($event)"></app-base-smile>
+  </div>
+</div>

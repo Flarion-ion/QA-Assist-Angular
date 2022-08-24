@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  qa-assist:
+    image: ${CI_REGISTRY_IMAGE}:latest
+    hostname: "{{.Service.Name}}-{{.Node.Hostname}}"
+    deploy:
+      update_config:
+        parallelism: 1
+        delay: 5s
+        order: start-first
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.qa-assist_qa-assist_qa-assist.rule=Host(`${VIRTUAL_HOST}`)"
+        - "traefik.http.services.qa-assist_qa-assist_qa-assist.loadbalancer.server.port=80"
+        - "traefik.docker.network=${NETWORK:-skynet}"
+    networks:
+      - skynet
+    logging:
+      options:
+        max-size: "20m"
+        max-file: "2"
+
+networks:
+  skynet:
+    name: ${NETWORK:-skynet}
+    external: true

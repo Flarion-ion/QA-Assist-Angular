@@ -1,0 +1,20 @@
+[
+  {
+    "type": "happy",
+    "text": "Отлично",
+    "value": 3,
+    "question": {}
+  },
+  {
+    "type": "normal",
+    "text": "Нормально",
+    "value": 2,
+    "question": {}
+  },
+  {
+    "type": "angry",
+    "text": "Плохо",
+    "value": 1,
+    "question": {}
+  }
+]
